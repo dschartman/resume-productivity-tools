@@ -1,3 +1,5 @@
+When finished, please output your notes in json format compatible with the following models:
+```python
 from typing import List, Optional
 from pydantic import BaseModel, Field
 from models.skills_model import Skills
@@ -59,3 +61,4 @@ class Project(BaseModel):
         ...,
         description="Specific actions, tasks, or efforts the individual made towards the completion of the project. This should highlight the individual's role and the part they played in the project's success.",
     )
+```
