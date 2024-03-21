@@ -92,10 +92,6 @@ This project is in its early stages and designed to streamline the job applicati
 
 We are committed to enhancing this tool and welcome feedback and contributions from the community. Stay tuned for updates as we work to bring these features to life.
 
-## Contributing
-
-Contributions are welcome! Please read our contributing guidelines (link to guidelines) for how to propose bug fixes, features, and improvements.
-
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
