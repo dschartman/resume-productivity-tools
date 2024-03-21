@@ -1,12 +1,12 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 
 
 class Skills(BaseModel):
-    Programming_Languages: List[str]
-    Frameworks_and_Libraries: List[str]
-    Tools_and_Platforms: List[str]
-    Cloud_Platforms: List[str]
-    AI_ML: List[str]
-    Methodologies: List[str]
-    Databases: List[str]
+    Programming_Languages: Optional[List[str]] = []
+    Frameworks_and_Libraries: Optional[List[str]] = []
+    Tools_and_Platforms: Optional[List[str]] = []
+    Cloud_Platforms: Optional[List[str]] = []
+    AI_ML: Optional[List[str]] = []
+    Methodologies: Optional[List[str]] = []
+    Databases: Optional[List[str]] = []

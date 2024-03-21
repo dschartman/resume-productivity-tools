@@ -2,3 +2,5 @@ __pycache__
 data/
 generated/
 .DS_Store
+combined.txt
+folder_to_context.sh

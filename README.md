@@ -1,101 +1,79 @@
 # resume-productivity-tools
-Tooling to help improve the workflow of building resumes.
 
-This guide provides instructions for adding and updating the JSON data structures used in the dynamic resume generation project. The project is structured to include information about skills, job experiences, projects, and education.
+This project automates the creation of customized resumes and cover letters tailored to specific job descriptions. It leverages Jobscan for optimizing documents against job listings, ensuring higher compatibility scores. Python, Jinja2, and Pydantic are used for template rendering and data validation, making the application process more efficient and targeted.
 
-## Project Structure Overview
+## Getting Started
 
-The project is organized into several key directories:
+### Prerequisites
 
-- `data/`: Contains JSON files for different resume sections (skills, jobs, projects, education).
-- `models/`: Houses Pydantic models for validating the JSON data.
-- `templates/`: Stores Jinja2 templates for rendering the resume.
+- Python 3.12 or higher
+- Poetry for dependency management
+- Pandoc
 
-## Adding and Updating Data
+### Installation
 
-### Skills
-
-Skills are categorized into Programming Languages, Frameworks and Libraries, Tools and Platforms, Cloud Platforms, AI & ML, Methodologies, and Databases.
-
-1. **Base Skills JSON (`data/base_skills.json`)**: To add or update your base skills, edit the corresponding category array in the `base_skills.json` file. Here’s the structure:
-
-    ```json
-    {
-      "Programming_Languages": ["Python", "Java"],
-      "Frameworks_and_Libraries": ["Django"],
-      ...
-    }
-    ```
-
-2. **Project Skills**: Skills used in projects should be included in the project's JSON file under `technologies_used`, categorized accordingly.
-
-### Jobs
-
-Each job experience should have its own JSON file within `data/experiences/jobs/`.
-
-1. **Creating a Job JSON File**: Name the file descriptively, e.g., `senior_dev.json`, and structure it as follows:
-
-    ```json
-    {
-      "id": "job_1",
-      "company": "Tech Solutions Inc.",
-      "role": {
-        "title": "Senior Developer",
-        "responsibilities": ["Develop APIs", "Lead projects"]
-      },
-      ...
-    }
-    ```
-
-2. **Linking Projects**: Include an array of project IDs this job is associated with.
-
-### Projects
-
-Projects are stored in `data/experiences/projects/`. Separate them into `personal/` or `professional/` as needed.
-
-1. **Adding a Project**: Create a JSON file (e.g., `project_alpha.json`) with the project details:
-
-    ```json
-    {
-      "id": "project_1",
-      "name": "Project Alpha",
-      ...
-    }
-    ```
-
-### Education
-
-Education entries are located in `data/education.json`.
-
-1. **Updating Education**: Add or modify entries in the `education.json` file, using the following format for each entry:
-
-    ```json
-    {
-      "entries": [
-        {
-          "degree": "B.Sc. Computer Science",
-          "institution": "University X",
-          ...
-        }
-      ]
-    }
-    ```
-
-## Validating Data with Pydantic Models
-
-Each section’s data should be validated against its corresponding Pydantic model in the `models/` directory before being used. Ensure your updates conform to the expected structure defined by these models.
-
-## Rendering the Resume
-
-After updating the data:
-
-1. **Validate Data**: Use the provided Python scripts to validate your JSON files against the Pydantic models.
-2. **Generate Resume**: Run the `generate_resume.py` script, specifying the template and output file.
+1. Clone the repository:
 
 ```bash
-python generate_resume.py template.jinja output.md
+git clone https://yourrepositorylink.com
 ```
 
-## Conclusion
+2. Navigate to the project directory:
 
-This guide should help you manage the data for your dynamic resume generation project. Regularly updating and validating your information ensures that your resume remains current and accurately reflects your professional achievements.
+```bash
+cd resume-productivity-tools
+```
+
+3. Install dependencies using Poetry:
+
+```bash
+poetry install
+```
+
+### Usage
+
+Generate a customized resume and cover letter with the following command:
+
+```bash
+./scripts/create_resume.sh <TEMPLATE_NAME> <OUTPUT_FILE_NAME>
+```
+
+- `<TEMPLATE_NAME>`: The name of the Jinja2 template file (without the extension).
+- `<OUTPUT_FILE_NAME>`: The base name for the output file (without the extension).
+
+Example:
+
+```bash
+./scripts/create_resume.sh swe_resume_template my_resume
+```
+
+This command will generate `my_resume.md` and convert it to `my_resume.docx`.
+
+## Project Structure
+
+- `data/`: JSON files for resume sections (skills, jobs, projects, education).
+- `models/`: Pydantic models for data validation.
+- `templates/`: Jinja2 templates for resume and cover letter.
+- `utils/`: Utility scripts for data handling and template rendering.
+- `generate_resume.py`: Main script for generating resumes.
+
+## Customizing Your Resume
+
+### Adding Data
+
+1. **Skills**: Edit `data/base_skills.json` to update your skills.
+2. **Jobs**: Add or edit JSON files in `data/jobs/` for each job experience.
+3. **Projects**: Add project details in `data/projects/`.
+4. **Education**: Update `data/education.json` with your educational background.
+
+### Modifying Templates
+
+Edit the Jinja2 templates in the `templates/` directory to change the layout or content of your resume and cover letter.
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guidelines (link to guidelines) for how to propose bug fixes, features, and improvements.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
