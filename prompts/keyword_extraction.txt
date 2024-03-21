@@ -1,0 +1,11 @@
+Conduct an in-depth analysis of the provided text to identify key words, creating a JSON object for each that encapsulates its rank, weight on a scale from 0 to 100, and context within the text. The weight should reflect the keyword's importance, considering factors such as frequency of appearance, relevance to the main theme, and its role in critical text sections. Additionally, include a general description of the keyword's relevance and a list of related phrases or scenarios that highlight its significance.
+
+Example JSON object for the keyword 'Cost':
+```json
+{
+  "keyword": "Cost",
+  "weight": 75,
+  "context": "Refers to the financial implications in scenarios such as pricing strategies and cost reduction efforts.",
+  "relatedPhrases": ["budgeting concerns", "expense management", "financial planning"]
+}
+```
