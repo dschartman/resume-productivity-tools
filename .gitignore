@@ -4,3 +4,4 @@ generated/
 .DS_Store
 combined.txt
 folder_to_context.sh
+sensitive_prompts/
