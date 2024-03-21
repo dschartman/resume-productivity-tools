@@ -1,6 +1,21 @@
-Conduct an in-depth analysis of the provided text to identify key words, creating a JSON object for each that encapsulates its rank, weight on a scale from 0 to 100, and context within the text. The weight should reflect the keyword's importance, considering factors such as frequency of appearance, relevance to the main theme, and its role in critical text sections. Additionally, include a general description of the keyword's relevance and a list of related phrases or scenarios that highlight its significance.
+**Prompt for AI Text Analysis:**
 
-Example JSON object for the keyword 'Cost':
+Create a comprehensive JSON list that analyzes key terms from the provided text. Each JSON object should represent a unique keyword, incorporating several essential attributes:
+
+- **Keyword**: The term being analyzed.
+- **Weight**: A numerical value between 0 and 100 indicating the keyword's importance. The importance should reflect the keyword's frequency, its relevance to the main theme, and its significance in critical sections of the text. Prioritize terms unique to the text's subject matter. 
+- **Context**: A succinct description of the keyword's role within the text, focusing on its relevance to the overarching themes. A general explanation is sufficient, without the need for detailed examples.
+- **RelatedPhrases**: A list of phrases or scenarios related to the keyword. These can be derived both from direct mentions within the text and inferred connections, showcasing the term's significance.
+
+For determining the **weight** of each keyword, consider a balanced approach that accounts for both the term's frequency and its specificity to the text's subject matter. The exact formula can be flexible but should aim to capture the essence of the keyword's impact on the text's meaning and themes.
+
+**Output Requirements:**
+
+- The list should be ordered by weight, although the primary focus is on the accuracy and completeness of the keyword analysis rather than the sorting.
+- Ensure that each keyword's analysis is thorough, capturing its essence and relevance to the text.
+
+**Example JSON Object for the Keyword 'Cost':**
+
 ```json
 {
   "keyword": "Cost",
@@ -9,3 +24,5 @@ Example JSON object for the keyword 'Cost':
   "relatedPhrases": ["budgeting concerns", "expense management", "financial planning"]
 }
 ```
+
+This structured approach aims to extract meaningful insights from the text, highlighting key terms and their significance in an organized and detailed manner.
