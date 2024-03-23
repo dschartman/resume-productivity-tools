@@ -1,13 +1,24 @@
-from fastapi import FastAPI
+import os
+import openai
+from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/generate-text/")
+async def generate_text(prompt: str):
+    try:
+        response = openai.Completion.create(
+            engine="gpt-4-0125-preview",
+            prompt=prompt,
+            temperature=0.7,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+        )
+        return {"response": response.choices[0].text.strip()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
