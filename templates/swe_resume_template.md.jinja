@@ -6,7 +6,7 @@
 - GitHub: [{{ core_info.github }}]({{ core_info.github }})
 
 ## Summary
-Experienced Senior Software Engineer specializing in backend development and DevOps, with a focus on Python, Java, and cloud solutions. Proven leader in innovative projects, eager to apply my technical foundation and leadership skills to innovate.
+Experienced Senior Software Engineer transitioning to full-stack development, with expertise in backend engineering and an interest in AI applications. Adept at data integrity and process automation, eager to evolve and lead in innovative tech landscapes.
 
 ## Experience
 {% for job in jobs -%}
@@ -15,14 +15,6 @@ Experienced Senior Software Engineer specializing in backend development and Dev
 {% for responsibility in job.role.responsibilities -%}
 - {{ responsibility }}
 {% endfor %}
-#### Key Projects
-{% for project_id in job.projects -%}
-{% for project in projects -%}
-{% if project.id == project_id -%}
-- **{{ project.name }}:** {{ project.description }}
-{% endif -%}
-{% endfor -%}
-{% endfor -%}
 {% endfor %}
 ## Projects
 {% for project in projects -%}
