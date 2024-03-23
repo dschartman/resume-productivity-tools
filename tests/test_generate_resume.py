@@ -5,7 +5,7 @@ import os
 
 @pytest.fixture
 def template_name():
-    return "swe_resume_template.md"  # Ensure this template exists for the test
+    return "swe_resume_template.md.jinja"  # Ensure this template exists for the test
 
 
 @pytest.fixture

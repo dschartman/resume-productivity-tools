@@ -1,5 +1,6 @@
 import json
 from pydantic import ValidationError, BaseModel
+from models.experience_model import Job
 
 from typing import Type, Dict, Any
 
@@ -47,4 +48,34 @@ def load_models(path: str, model: Type[BaseModel]) -> List[BaseModel]:
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
 
+    if model == Job:  # Ensure sorting only applies to Job models
+        validated_models.sort(key=lambda x: x.start_date, reverse=True)
+
     return validated_models
+
+
+def load_model_from_dir(directory: str, model: Type[BaseModel]) -> BaseModel:
+    """
+    Loads a model from JSON files in a specified directory. Each file corresponds to
+    a field in the model.
+
+    Args:
+    - directory: The base directory containing the model data.
+    - model: The Pydantic model class to instantiate.
+
+    Returns:
+    - An instance of the specified model class, populated with data from the directory.
+    """
+    data = {}
+    for field in model.__fields__.keys():
+        file_path = os.path.join(directory, f"{field}.json")
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                data[field] = json.load(file)
+        else:
+            print(f"No data found for {field} at {file_path}, skipping.")
+
+    try:
+        return model(**data)
+    except ValidationError as e:
+        raise ValueError(f"Error loading model {model.__name__}: {str(e)}")
