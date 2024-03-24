@@ -1,14 +1,21 @@
 import os
 from openai import OpenAI
 from fastapi import FastAPI, HTTPException
+from typing import List
 
 from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
 
+class Message(BaseModel):
+    role: str
+    content: str
+
+
 class GenerateTextRequest(BaseModel):
     prompt: str
+    conversation_history: List[Message] = []
 
 
 app = FastAPI()
@@ -33,18 +40,12 @@ client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 @app.post("/generate-text/")
 async def generate_text(request: GenerateTextRequest):
     try:
+        messages = request.conversation_history + [
+            {"role": "user", "content": request.prompt}
+        ]
         response = client.chat.completions.create(
             model="gpt-4-0125-preview",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant.",
-                },
-                {
-                    "role": "user",
-                    "content": request.prompt,
-                },
-            ],
+            messages=messages,
         )
         return {"response": response.choices[0].message}
     except Exception as e:

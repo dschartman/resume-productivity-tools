@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { generateText } from './services/api';
 
-
 function ChatWindow() {
-    const [message, setMessage] = useState('');
+    const [input, setInput] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!message.trim()) return;
+        if (!input.trim()) return;
+
+        const userMessage = { role: 'user', content: input };
+        const updatedMessages = [...messages, userMessage];
+        setMessages(updatedMessages);
+        setInput('');
 
         try {
-            const response = await generateText(message);
-            alert(`Generated text: ${response.response}`);
-            setMessage('');
+            const response = await generateText(input, messages);
+            const assistantMessage = response.response;
+            setMessages([...updatedMessages, assistantMessage]);
         } catch (error) {
             console.error('Failed to generate text:', error);
         }
@@ -21,11 +26,18 @@ function ChatWindow() {
     return (
         <div>
             <h2>Chat with our AI</h2>
+            <div className="chat-messages">
+                {messages.map((message, index) => (
+                    <div key={index} className={`message ${message.role}`}>
+                        {message.content}
+                    </div>
+                ))}
+            </div>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
                     placeholder="Type your message here..."
                 />
                 <button type="submit">Send</button>

@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.chat-messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.message.user {
+  background-color: #f1f0f0;
+  text-align: right;
+}
+
+.message.assistant {
+  background-color: #d0e8ff;
+  text-align: left;
+}
