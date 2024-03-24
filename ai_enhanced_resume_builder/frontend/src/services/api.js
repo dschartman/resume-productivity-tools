@@ -2,7 +2,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const generateText = async (prompt) => {
   try {
-    const response = await fetch(`${backendUrl}/generate-text/`, {
+    const response = await fetch(`http://backend:8000/generate-text/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
