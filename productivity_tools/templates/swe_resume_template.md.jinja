@@ -6,29 +6,42 @@
 - GitHub: [{{ core_info.github }}]({{ core_info.github }})
 
 ## Summary
-Experienced Senior Software Engineer transitioning to full-stack development, with expertise in backend engineering and an interest in AI applications. Adept at data integrity and process automation, eager to evolve and lead in innovative tech landscapes.
+Experienced Senior Software Engineer transitioning to full-stack development, with expertise in backend engineering and an interest in AI applications and machine learning. Adept at data integrity and process automation, eager to evolve and lead in innovative tech landscapes.
 
 ## Experience
 {% for job in jobs -%}
 ### {{ job.role.title }}, {{ job.company }} - {{ job.location }} ({{ job.start_date }} to {% if job.end_date %}{{ job.end_date }}{% else %}Present{% endif %})
-#### Responsibilities
 {% for responsibility in job.role.responsibilities -%}
 - {{ responsibility }}
 {% endfor %}
 {% endfor %}
-## Projects
+
+## Skills
+{% set categorized_skills_with_projects = {} -%}
+{% for category, skills in categorized_skills.items() -%}
+{% set _ = categorized_skills_with_projects.update({category: skills}) -%}
+{% endfor %}
+{% for project in projects -%}
+{% for category, skills in project.technologies_used.items() -%}
+{% if category not in categorized_skills_with_projects -%}
+{% set _ = categorized_skills_with_projects.update({category: []}) -%}
+{% endif -%}
+{% for skill in skills -%}
+{% if skill not in categorized_skills_with_projects[category] -%}
+{% set _ = categorized_skills_with_projects[category].append(skill) -%}
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+{% endfor %}
+{% for category, skills in categorized_skills_with_projects.items() %}
+### {{ category }}
+{{ skills | join(", ") }}
+{% endfor %}
+
+## Key Projects
 {% for project in projects -%}
 ### {{ project.name }}
-#### Description: 
 {{ project.description }}
-{% set all_skills = [] -%}
-{% for category, skills in project.technologies_used.items() -%}
-    {% for skill in skills -%}
-        {% set _ = all_skills.append(skill) -%}
-    {% endfor -%}
-{% endfor %}
-#### Technologies Used:
-{{ all_skills | join(', ') }}
 
 #### Achievements:
 {% for achievement in project.achievements -%}
@@ -39,12 +52,7 @@ Experienced Senior Software Engineer transitioning to full-stack development, wi
 - {{ contribution }}
 {% endfor %}
 {% endfor -%}
-## Skills
-{% for category, skills in categorized_skills.items() -%}
-### {{ category }} 
-{{ skills | join(", ") }}
 
-{% endfor %}
 ## Education
 {% for entry in education.entries -%}
 - **{{ entry.degree }}**, {{ entry.institution }} ({{ entry.end_year }})

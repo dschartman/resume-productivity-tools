@@ -45,6 +45,7 @@ def load_models(path: str, model: Type[BaseModel]) -> List[BaseModel]:
             try:
                 validated_model = load_model(file_path, model)
                 validated_models.append(validated_model)
+                print(file_path)
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
 
