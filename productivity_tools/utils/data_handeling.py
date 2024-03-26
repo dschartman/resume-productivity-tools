@@ -1,6 +1,7 @@
 import json
 from pydantic import ValidationError, BaseModel
 from models.experience_model import Job
+from datetime import datetime
 
 from typing import Type, Dict, Any
 
@@ -29,6 +30,15 @@ def load_model(file_path, model: Type[BaseModel]) -> BaseModel:
     return validated_data
 
 
+def load_models_paths(paths: List[str], model: Type[BaseModel]) -> List[BaseModel]:
+    all_validated_models = []
+    for path in paths:
+        validated_models = load_models(path, model)
+        all_validated_models.extend(validated_models)
+
+    return all_validated_models
+
+
 def load_models(path: str, model: Type[BaseModel]) -> List[BaseModel]:
     validated_models = []
 
@@ -50,7 +60,9 @@ def load_models(path: str, model: Type[BaseModel]) -> List[BaseModel]:
                 print(f"Error processing {filename}: {str(e)}")
 
     if model == Job:  # Ensure sorting only applies to Job models
-        validated_models.sort(key=lambda x: x.start_date, reverse=True)
+        validated_models.sort(
+            key=lambda x: datetime.strptime(x.start_date, "%m/%y"), reverse=True
+        )
 
     return validated_models
 

@@ -2,7 +2,7 @@ from typing import List
 from pydantic import BaseModel, Field
 from models.core_info_model import CoreInfo
 from models.eductation_model import Education
-from models.experience_model import Job, Project
+from models.experience_model import Job, Project, Summary
 from models.skills_model import Skills
 
 
@@ -27,3 +27,7 @@ class ResumeInfo(BaseModel):
     jobs: List[Job] = Field(..., description="List of job experiences.")
     projects: List[Project] = Field(..., description="List of projects worked on.")
     skills: Skills = Field(..., description="Set of skills and proficiencies.")
+    summary: Summary = Field(
+        ...,
+        description="A personal summary highlighting the individual's professional background and aspirations.",
+    )

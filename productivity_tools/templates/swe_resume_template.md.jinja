@@ -6,21 +6,22 @@
 - GitHub: [{{ core_info.github }}]({{ core_info.github }})
 
 ## Summary
-Experienced Senior Software Engineer transitioning to full-stack development, with expertise in backend engineering and an interest in AI applications and machine learning. Adept at data integrity and process automation, eager to evolve and lead in innovative tech landscapes.
+{{ summary }}
 
 ## Experience
+
 {% for job in jobs -%}
 ### {{ job.role.title }}, {{ job.company }} - {{ job.location }} ({{ job.start_date }} to {% if job.end_date %}{{ job.end_date }}{% else %}Present{% endif %})
 {% for responsibility in job.role.responsibilities -%}
 - {{ responsibility }}
 {% endfor %}
-{% endfor %}
+{% endfor -%}
 
 ## Skills
 {% set categorized_skills_with_projects = {} -%}
 {% for category, skills in categorized_skills.items() -%}
 {% set _ = categorized_skills_with_projects.update({category: skills}) -%}
-{% endfor %}
+{% endfor -%}
 {% for project in projects -%}
 {% for category, skills in project.technologies_used.items() -%}
 {% if category not in categorized_skills_with_projects -%}
@@ -32,11 +33,13 @@ Experienced Senior Software Engineer transitioning to full-stack development, wi
 {% endif -%}
 {% endfor -%}
 {% endfor -%}
-{% endfor %}
-{% for category, skills in categorized_skills_with_projects.items() %}
+{% endfor -%}
+{% for category, skills in categorized_skills_with_projects.items() -%}
+
 ### {{ category }}
 {{ skills | join(", ") }}
-{% endfor %}
+
+{% endfor -%}
 
 ## Key Projects
 {% for project in projects -%}
@@ -46,7 +49,8 @@ Experienced Senior Software Engineer transitioning to full-stack development, wi
 #### Achievements:
 {% for achievement in project.achievements -%}
 - {{ achievement }}
-{% endfor %}
+{% endfor -%}
+
 #### Contributions:
 {% for contribution in project.contributions -%}
 - {{ contribution }}

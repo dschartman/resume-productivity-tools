@@ -1,0 +1,11 @@
+{
+    "core_info": "data/core_info.json",
+    "summary": "data/summeries/swe.json",
+    "education": "data/education.json",
+    "jobs": "data/jobs",
+    "projects": [
+        "data/projects"
+    ],
+    "skills": "data/base_skills.json",
+    "template_name": "swe_resume_template.md.jinja"
+}

@@ -3,6 +3,10 @@ from pydantic import BaseModel, Field
 from models.skills_model import Skills  # Assuming this import path is correct
 
 
+class Summary(BaseModel):
+    content: str
+
+
 class Role(BaseModel):
     """
     Represents the specific role held within a job, including title and responsibilities.
@@ -55,13 +59,13 @@ class Job(BaseModel):
     )
     start_date: str = Field(
         ...,
-        example="2020-01-01",
-        description="The start date of the employment, formatted as YYYY-MM-DD.",
+        example="01-23",
+        description="The start date of the employment, formatted as MM-YY.",
     )
     end_date: Optional[str] = Field(
         None,
-        example="2022-12-31",
-        description="The end date of the employment, formatted as YYYY-MM-DD.",
+        example="01-24",
+        description="The end date of the employment, formatted as MM-YY.",
     )
     projects: List[str] = Field(
         default=[],
